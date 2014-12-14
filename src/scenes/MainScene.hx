@@ -70,7 +70,11 @@ class MainScene extends Scene
 
 		// mousecursor
 
-		add(new Mousecursor());
+		mousecursor = new Mousecursor();
+		mousecursor.layer = -1;
+		add(mousecursor);
+
+		deck.addtoScene(this);
 
 
 	}
