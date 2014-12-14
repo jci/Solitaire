@@ -13,6 +13,9 @@ import com.haxepunk.utils.Key;
 import com.haxepunk.HXP;
 import openfl.events.Event;
 import com.haxepunk.utils.Draw;
+import com.haxepunk.Tween;
+import com.haxepunk.Tweener;
+import com.haxepunk.tweens.misc.NumTween;
 import utils.CardFace;
 
 
@@ -41,6 +44,7 @@ class Card extends Entity
 	private var _origx : Float;
 	private var _origy : Float;
 	private var _isSelected : Bool;
+	private var _sizetween : Tween;
 
 	public override function new(cardvalue:Int = 0, cardtype : Int = 0, thisx : Float =0, thisy :Float = 0)	
 	{
@@ -66,6 +70,13 @@ class Card extends Entity
 		
 		addGraphic(tempinstance.loadCard(cardvalue,cardtype));
 		setHitboxTo(tempinstance.getHitbox());
+
+		_sizetween = new NumTween();
+		_sizetween.tween(-30,30,8);
+
+	
+		addTween(_sizetween);	
+
 
 
 	}
@@ -104,7 +115,7 @@ class Card extends Entity
 
 		if (_isSelected)
 		{
-
+			trace(["value : " + _sizetween.value]);
 		}
 	}
 
