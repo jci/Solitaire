@@ -22,7 +22,7 @@ class Main extends Engine
 	}
 
 	override public function new(width:Int=0, height:Int=0, frameRate:Float=60, fixed:Bool=false, ?renderMode:RenderMode) {
-        super(720, 480, frameRate, fixed, renderMode);
+        super(720, 480, frameRate, fixed, RenderMode.HARDWARE);
     }
 
 	public static function main() { new Main(); }
