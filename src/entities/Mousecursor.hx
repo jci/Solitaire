@@ -5,6 +5,7 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.Graphic;
 import com.haxepunk.utils.Input;
 import com.haxepunk.masks.Hitbox;
+import openfl.ui.Mouse;
 
 
 class Mousecursor extends Entity
@@ -21,16 +22,22 @@ class Mousecursor extends Entity
 		thisimage.centerOrigin();
 		this.setHitbox(1,1);
 		addGraphic(thisimage);
+		this.visible = true;
+		Mouse.hide();
 	}
 
 	public override function update()
 	{
 		super.update();
 
-
+#if desktop
 		this.x = Input.mouseX;
 		this.y = Input.mouseY;
+#else
 
+		this.x = Input.mouseFlashX;
+		this.y = Input.mouseFlashY;
+#end
 		posx = this.x;
 		posy = this.y;
 

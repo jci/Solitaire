@@ -58,7 +58,7 @@ class MainScene extends Scene
 		{
 			var thiscard : Card;
 			thiscard = new Card(cvalue, ccolor, (cvalue*30+90), (ccolor*70+50));	
-			this.add(thiscard);
+
 			cvalue++;
 
 			if (cvalue >12)
@@ -66,6 +66,10 @@ class MainScene extends Scene
 				cvalue = 0;
 				ccolor++;
 			}
+
+			// this piece of code will eventually go away
+			this.add(thiscard);
+			deck.push(thiscard);
 			
 		}
 
@@ -86,10 +90,8 @@ class MainScene extends Scene
 		_sprite.addChild(_message);
 		HXP.stage.addChild(_sprite);
 
-
 		mousecursor = new Mousecursor();
 		mousecursor.layer = -1;
-		mousecursor.visible = false;
 		add(mousecursor);
 
 
