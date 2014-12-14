@@ -5,10 +5,12 @@
  	<app file="Main" main="Main" path="bin" />
 
 	<window fps="60" background="0x003333" />
-	<window width="640" height="360" resizable="false" if="desktop"/>
+	<window width="720" height="480" resizable="true" fullscreen="false" if="linux"/>
+	<window width="720" height="480" resizable="true" fullscreen="true" if="html5"/>
 	<window width="0" height="0" resizable="false" if="mobile"/>
+	<window width="0" height="0" resizable="false" if="flash"/>
 
-	<window fullscreen="true" />
+
 	<window orientation="landscape" vsync="true" antialiasing="0" if="cpp" />
 
 	<source path="src" />

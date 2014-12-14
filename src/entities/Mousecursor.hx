@@ -23,7 +23,6 @@ class Mousecursor extends Entity
 		this.setHitbox(1,1);
 		addGraphic(thisimage);
 		this.visible = true;
-		Mouse.hide();
 		this.layer = -1;
 	}
 

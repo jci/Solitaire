@@ -16,15 +16,6 @@ import com.haxepunk.utils.Draw;
 import utils.CardFace;
 
 
-/*
-
-   TODO:
-   - remove the dragging code from here and implement it on the scene code
-   - create a much much better click detection system
-
-
-   */
-
 
 
 class Card extends Entity
@@ -49,6 +40,7 @@ class Card extends Entity
 	private var _selection : Bool;
 	private var _origx : Float;
 	private var _origy : Float;
+	private var _isSelected : Bool;
 
 	public override function new(cardvalue:Int = 0, cardtype : Int = 0, thisx : Float =0, thisy :Float = 0)	
 	{
@@ -64,15 +56,17 @@ class Card extends Entity
 		_cardtype 	=	cardtype;
 		_isVisible 	=	false;
 		_isFlipped	=	false;
+		_isSelected = 	false;
 		_draggable	=	false;
 
 		_stCard = doType(cardtype);
 
-		layer = cardtype*4+1;
+		layer = 4;
 		type = _cardvalue + " of " + doType(_cardtype);
 		
 		addGraphic(tempinstance.loadCard(cardvalue,cardtype));
 		setHitboxTo(tempinstance.getHitbox());
+
 
 	}
 
@@ -104,9 +98,14 @@ class Card extends Entity
 
 	}
 
-	public function shuffle(deck : Array<Card>)
+	public override function update()
 	{
-		// yeah!
+		super.update();
 
+		if (_isSelected)
+		{
+
+		}
 	}
+
 }

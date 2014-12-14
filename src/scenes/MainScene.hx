@@ -74,6 +74,8 @@ class MainScene extends Scene
 		mousecursor.layer = -1;
 		add(mousecursor);
 
+
+		deck.shuffle();
 		deck.addtoScene(this);
 
 
