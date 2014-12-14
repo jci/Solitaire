@@ -24,6 +24,7 @@ class Mousecursor extends Entity
 		addGraphic(thisimage);
 		this.visible = true;
 		Mouse.hide();
+		this.layer = -1;
 	}
 
 	public override function update()

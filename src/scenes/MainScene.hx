@@ -56,34 +56,6 @@ class MainScene extends Scene
 
 		deck = new Deck();
 
-		var alternatevisible = false;
-/*
-		for (counter in 0...52)
-		{
-			var thiscard : Card;
-			thiscard = new Card(cvalue, ccolor, (cvalue*30+90), (ccolor*70+50));	
-
-			cvalue++;
-
-			if (cvalue >12)
-			{
-				cvalue = 0;
-				ccolor++;
-			}
-
-			// this piece of code will eventually go away
-			thiscard.visible = alternatevisible;
-			alternatevisible = !alternatevisible;
-			this.add(thiscard);
-			deck.push(thiscard);
-		}
-
-	
-		deck.shuffle();		
-
-		*/
-
-
 		_message  = new Sprite();
 		_messagelog = new TextField();
 		_message.addChild(_messagelog);
@@ -96,12 +68,9 @@ class MainScene extends Scene
 		_sprite.addChild(_message);
 		HXP.stage.addChild(_sprite);
 
-
 		// mousecursor
 
-		mousecursor = new Mousecursor();
-		mousecursor.layer = -1;
-		add(mousecursor);
+		add(new Mousecursor());
 
 
 	}
