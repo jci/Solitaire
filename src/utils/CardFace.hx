@@ -11,6 +11,8 @@ import com.haxepunk.graphics.atlas.AtlasRegion;
 import com.haxepunk.graphics.atlas.TileAtlas;
 import com.haxepunk.masks.Hitbox;
 
+import entities.Card;
+
 class CardFace
 {
 	public static var _instance : CardFace;
@@ -59,3 +61,4 @@ class CardFace
 	}
 
 }
+

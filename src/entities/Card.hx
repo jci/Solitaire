@@ -60,11 +60,8 @@ class Card extends Entity
 		y = thisy;
 
 		_draggable = true;
-			
 		_cardvalue	=	cardvalue;
 		_cardtype 	=	cardtype;
-
-
 		_isVisible 	=	false;
 		_isFlipped	=	false;
 		_draggable	=	false;
@@ -104,6 +101,12 @@ class Card extends Entity
 	{
 		var setselected :Bool = true;
 		//then?
+
+	}
+
+	public function shuffle(deck : Array<Card>)
+	{
+		// yeah!
 
 	}
 }

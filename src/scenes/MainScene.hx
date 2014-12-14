@@ -10,7 +10,7 @@ import flash.text.TextFormatAlign;
 import com.haxepunk.utils.Input;
 import entities.Card;
 import entities.Mousecursor;
-
+import entities.Deck;
 
 /*
 
@@ -30,13 +30,16 @@ import entities.Mousecursor;
 class MainScene extends Scene
 {
 
-	private var deck : Array<Card>;
 
 	private var _message : Sprite;
 	public var _messagelog : TextField;
 	public var mousecursor : Mousecursor;
 	public var _dragging :Bool;
 
+
+	public var _cardtableX = HXP.width;
+	public var _cardtableY = HXP.height;
+	public var deck : Deck;
 
 
 	public override function new()
@@ -51,9 +54,10 @@ class MainScene extends Scene
 		super();
 		_sprite = new Sprite();
 
-		deck = new Array<Card>();
+		deck = new Deck();
 
-
+		var alternatevisible = false;
+/*
 		for (counter in 0...52)
 		{
 			var thiscard : Card;
@@ -68,17 +72,20 @@ class MainScene extends Scene
 			}
 
 			// this piece of code will eventually go away
+			thiscard.visible = alternatevisible;
+			alternatevisible = !alternatevisible;
 			this.add(thiscard);
 			deck.push(thiscard);
-			
 		}
 
+	
+		deck.shuffle();		
 
-		// add the rest of the shit of the screen
+		*/
+
 
 		_message  = new Sprite();
 		_messagelog = new TextField();
-
 		_message.addChild(_messagelog);
 		_messagelog.x = 0;
 		_messagelog.y = 10;
@@ -86,9 +93,11 @@ class MainScene extends Scene
 		_messagelog.defaultTextFormat.color = 0x101010;
 		_messagelog.defaultTextFormat.align = TextFormatAlign.LEFT;
 		_messagelog.text = "THIS IS SPARTAAA";
-
 		_sprite.addChild(_message);
 		HXP.stage.addChild(_sprite);
+
+
+		// mousecursor
 
 		mousecursor = new Mousecursor();
 		mousecursor.layer = -1;
