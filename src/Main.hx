@@ -21,12 +21,18 @@ class Main extends Engine
 		HXP.scene = new MainScene();
 	}
 
-#if html5 || android
+#if html5 
 	override public function new(width:Int=0, height:Int=0, frameRate:Float=60, fixed:Bool=false, ?renderMode:RenderMode) {
 //        super(720,480, frameRate, fixed, RenderMode.HARDWARE);
         super(width, height, frameRate, fixed, RenderMode.HARDWARE);
     }
 #elseif flash
+	override public function new(width:Int=0, height:Int=0, frameRate:Float=60, fixed:Bool=false, ?renderMode:RenderMode) {
+//        super(720,480, frameRate, fixed, RenderMode.HARDWARE);
+        super(width, height, frameRate, fixed, RenderMode.BUFFER);
+    }
+
+#elseif html5
 	override public function new(width:Int=0, height:Int=0, frameRate:Float=60, fixed:Bool=false, ?renderMode:RenderMode) {
 //        super(720,480, frameRate, fixed, RenderMode.HARDWARE);
         super(width, height, frameRate, fixed, RenderMode.BUFFER);

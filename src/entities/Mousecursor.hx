@@ -6,6 +6,7 @@ import com.haxepunk.Graphic;
 import com.haxepunk.utils.Input;
 import com.haxepunk.masks.Hitbox;
 import openfl.ui.Mouse;
+import scenes.MainScene;
 
 
 class Mousecursor extends Entity
@@ -17,17 +18,25 @@ class Mousecursor extends Entity
 	public override function new()
 	{
 		super();
-		this.type = "mousecursor";
+		init();
+	}
+
+	private function init()
+	{
+		type = "mousecursor";
 		thisimage = new Image("graphics/jci.png");
 		thisimage.centerOrigin();
-		this.setHitbox(1,1);
+		setHitbox(1,1);
 		addGraphic(thisimage);
 		this.visible = true;
-		this.layer = -1;
+		this.layer = 4;
+
 	}
 
 	public override function update()
 	{
+
+
 		super.update();
 
 #if desktop
@@ -41,6 +50,21 @@ class Mousecursor extends Entity
 		posx = this.x;
 		posy = this.y;
 
+
+
+		var collision = collide("card", this.x,this.y);
+
+		if (collision != null)
+		{
+			var cardtemp = cast(collision ,Card);
+		//	trace (["" + cardtemp.cardname + " " + cardtemp.type]);
+
+			if (Input.mousePressed)
+			{
+				var tempscene = cast(this.scene,MainScene);
+				tempscene.deck.shuffle();
+			}
+		}
 
 
 	}

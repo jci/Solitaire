@@ -84,7 +84,10 @@ class MainScene extends Scene
 	public override function update()
 	{
 		super.update();
-		_messagelog.text = mousecursor.posx  + " " + mousecursor.posy;
+		if (Input.mousePressed)
+		{
+			deck.reshuffle(this);
+		}
 	}
 
 }

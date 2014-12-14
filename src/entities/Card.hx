@@ -32,9 +32,9 @@ class Card extends Entity
 	private var _isFlipped : Bool;
 	private var _isVisible : Bool;
 	private var _stCard : String;
-	private var _cardvalue : Int; // card value 0-12
-	private var _cardtype : Int; // card type 0-3
-	private var _cardface : Graphic; // card graphics
+	private var _cardvalue : Int; 
+	private var _cardtype : Int; 
+	private var _cardface : Graphic;
 	private var _cardcaret : Graphic;
 	private var _cardutil : CardFace;
 	private var _mouseover : Bool;
@@ -44,7 +44,9 @@ class Card extends Entity
 	private var _origx : Float;
 	private var _origy : Float;
 	private var _isSelected : Bool;
-	private var _sizetween : Tween;
+	private var _sizetween : NumTween;
+
+	public var cardname : String;
 
 	public override function new(cardvalue:Int = 0, cardtype : Int = 0, thisx : Float =0, thisy :Float = 0)	
 	{
@@ -58,15 +60,11 @@ class Card extends Entity
 		_draggable = true;
 		_cardvalue	=	cardvalue;
 		_cardtype 	=	cardtype;
-		_isVisible 	=	false;
-		_isFlipped	=	false;
-		_isSelected = 	false;
-		_draggable	=	false;
 
 		_stCard = doType(cardtype);
 
 		layer = 4;
-		type = _cardvalue + " of " + doType(_cardtype);
+		cardname = (_cardvalue+1) + " of " + doType(_cardtype);
 		
 		addGraphic(tempinstance.loadCard(cardvalue,cardtype));
 		setHitboxTo(tempinstance.getHitbox());
@@ -74,8 +72,9 @@ class Card extends Entity
 		_sizetween = new NumTween();
 		_sizetween.tween(-30,30,8);
 
-	
 		addTween(_sizetween);	
+
+		type = "card";
 
 
 
@@ -102,21 +101,12 @@ class Card extends Entity
 	}
 
 
-	public function selectedCard()
-	{
-		var setselected :Bool = true;
-		//then?
-
-	}
-
 	public override function update()
 	{
+
 		super.update();
 
-		if (_isSelected)
-		{
-			trace(["value : " + _sizetween.value]);
-		}
+
 	}
 
 }
