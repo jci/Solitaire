@@ -2,3 +2,11 @@ Solitaire
 =========
 
 My own rendition of solitaire being done like a madman
+
+Personal message:
+// ME FROM THE FUTURE:
+// THIS IS ME FROM THE PAST. PLEASE FORGIVE ME.
+// I TRIED HARD BUT I AM WAY TO STUPID TO FIGURE OUT 
+// SOMETHING SO SIMPLE. AS DRAG&DROP WITHOUT THIS KINDA HACK
+// SINCERELY,
+// ME FROM THE PAST.
