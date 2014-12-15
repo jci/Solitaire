@@ -80,7 +80,7 @@ class MainScene extends Scene
 		add(mousecursor);
 
 		deck.shuffle();
-		deck.addtoScene(this);
+		deal();
 
 	}
 
@@ -90,6 +90,18 @@ class MainScene extends Scene
 
 		// i could handle collision here
 		// but I am too lazy to do that
+	}
+
+	function deal()
+	{
+		deck.deal();
+
+		for (i in 0...deck.deck.length)
+		{
+			var thecard = deck.deck[i];
+			add(thecard);
+
+		}
 
 	}
 

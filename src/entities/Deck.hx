@@ -15,6 +15,8 @@ class Deck
 	// YO DAWG I HEARD YOU LIKE DECKS
 	// SO I PUT A DECK IN YOUR DECK WHILE YOU DECK
 
+	private var _topdeck : Int;
+
 	public function new()
 	{
 		deck = new Array<Card>();
@@ -48,6 +50,9 @@ class Deck
 
 			deck.push(thiscard);
 		}
+
+		_topdeck = 0;
+
 
 	}
 
@@ -101,22 +106,74 @@ class Deck
 		addtoScene(scene);
 	}
 
-	public function deal(scene : Scene)
+	public function deal()
 	{
 		shuffle();
 	
-		var col =1;
+		var col=1;
 		// now the rules
 		// first, the cards that go on game
-		for (mydeal in 0...6)
+		for (columns in 0...7)
 		{
-			// the columns
-			
+			// pick up card from deck and move it to playground
+			// top is always 0
+			for (cards in 0...col)
+			{
+				//trace(["" + cards + " " + columns + " " + col]);
+				playcard(col);
+			}
+
+			col++;
 
 		}
 
+		renderCards();
+
 	}
 
+	public function playcard(col : Int = 0)
+	{
+		deck[_topdeck].cardstate = INGAME;
+		deck[_topdeck].column = col;
+		_topdeck++;
+	}
 
-	
+	private function renderCards()
+	{
+		var col1=0;
+		var count=0;
+
+		//
+		for (i in 0...deck.length)
+		{
+			var mycard : Card = deck[i];
+
+			if (mycard.cardstate == INGAME)
+			{
+
+			trace(["" + deck.length + " " + mycard.cardname + " " + mycard.cardstate + " " + mycard.column]);
+				var posx = mycard.column * 80 + 10; // hardcoded!
+				mycard.x = posx;
+				mycard.y = 300;
+				if (mycard.column == col1)
+				{
+					count++;
+					mycard.y = 300+count*20;
+
+				}
+				else
+				{
+					col1 = mycard.column;
+					count = 0;
+				}
+			}
+
+			if (mycard.cardstate == DECK)
+			{
+				mycard.x = 50;
+				mycard.y = 100;
+			}
+		}
+	}
+
 }

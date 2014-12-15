@@ -22,9 +22,10 @@ import com.haxepunk.graphics.Canvas;
 
 enum CARDSTATE
 {
-	OUTGAME;
+	INGAME;
 	GAME;
 	DECK;
+	FOUNDATION;
 }
 
 enum FOUNDATION
@@ -67,6 +68,7 @@ class Card extends Entity
 	public var cardname : String;
 	private var _canvas : Canvas;
 	public var tempgr : Image;
+	public var column : Int;
 
 	public var cardstate : CARDSTATE;
 
@@ -112,7 +114,8 @@ class Card extends Entity
 
 		// all cards start on the deck
 
-		cardstate = OUTGAME;
+		cardstate = DECK;
+		column = 0;
 
 	}
 
@@ -166,6 +169,11 @@ class Card extends Entity
 			_cardcaret.visible = true;
 		}
 		_isFlipped = !_isFlipped;
+	}
+
+	public function moveFoundation()
+	{
+		cardstate = FOUNDATION;
 	}
 
 
