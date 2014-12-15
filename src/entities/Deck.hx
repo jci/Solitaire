@@ -56,9 +56,9 @@ class Deck
 		foundation = new Array<Array<Card>>();
 
 		foundation[0] = new Array<Card>(); // clubs
-		foundation[1] = new Array<Card>(); // hearts
-		foundation[2] = new Array<Card>(); // spades
-		foundation[3] = new Array<Card>(); // diamonds
+		foundation[1] = new Array<Card>(); // spades
+		foundation[2] = new Array<Card>(); // diamonds
+		foundation[3] = new Array<Card>(); // hearts
 
 		playground = new Array<Array<Card>>();
 
@@ -127,92 +127,131 @@ class Deck
 	public function deal()
 	{
 		shuffle();
-	
-		var col=1;
-		// now the rules
-		// first, the cards that go on game
-		for (columns in 0...7)
+
+		// move the corresponding cards to the respective places...
+
+		for (playc in 0...4)
 		{
-			// pick up card from deck and move it to playground
-			// top is always 0
-			for (cards in 0...col)
+			var tempcard = new Card();
+			tempcard = deck.pop();
+			tempcard.cardstate = INGAME;
+		//	trace(["" + tempcard.cardname + " being popped and put into playground"]);
+			playground[0].push(tempcard);
+		}
+
+		// this function has been implemented for pure implementation testing
+		// before delivering everything, take this piece of shit outta my sight!
+
+		for (foundat in 0...130)
+		{
+			var tempcard = new Card();
+			tempcard = deck.pop();
+		//	trace(["Testing to push onto foundation " + tempcard.cardname]);
+			if (!moveFoundation(tempcard)) 
 			{
-				//trace(["" + cards + " " + columns + " " + col]);
-				playcard(col);
+				deck.push(tempcard); // put it back, you maniac!
+				shuffle();
 			}
 
-			col++;
 
 		}
 
-		renderCards();
+		printFoundation();
+
+		for (ldeck in 0...deck.length)
+		{
+			deck[ldeck].cardstate = DECK;
+		}
+
+
 
 	}
 
-	public function playcard(col : Int = 0)
+
+	public function renderCards()
 	{
-		deck[_topdeck].cardstate = INGAME;
-		deck[_topdeck].column = col;
-		_topdeck++;
+
+		// render the deck array
+		// then the playground array
+		// then the foundation array
+
+		// let's render the foundation first
+
+		trace(["Render DECK has " + deck.length + " cards"]);
+
 	}
 
-	private function renderCards()
+	public function moveFoundation(card : Card)
 	{
 
-		// for fucks sake, I need to see now to do this properly
-		//
+		// now the implementation of the rules
 
-		var col1=0;
-		var count=0;
+		// rule 1 : you do not talk about the fight club
+		// rule 2 : you cannot put any card onto a blank foundation, only aces
+		// rule 3 : if the foundation is not null, check if the value of the last card is 1 of difference from the compared one
+		// rule 4 : ???
 
-		for (i in 0...deck.length)
+		var thisfound = card.returnType();
+		// check the foundation
+
+		var amount = foundation[thisfound].length;
+		if ( amount == 0 && card.returnValue()==0) // it's an ace!
 		{
-			var mycard : Card = deck[i];
+			card.cardstate = FOUNDATION;
+			foundation[thisfound].push(card);
+			trace(["Foundation added : " + card.cardname]);
+			return true;
+		}
 
-			if (mycard.cardstate == INGAME)
+		if (amount >0)
+		{
+			var lastlen = foundation[thisfound].length-1; //meaning, the last element
+			//trace(["Amount " + amount + " Lastlen " + lastlen + " on foundation " + card.returnType() ]);
+			var comparecard = foundation[thisfound][lastlen];
+			var comparecardvalue = comparecard.returnValue()+1;
+			if (comparecardvalue == card.returnValue())
 			{
-
-				var posx = mycard.column * 80 + 10; // hardcoded!
-				mycard.x = posx;
-				mycard.y = 300+count*20;
-
-				if (mycard.column == (count+1))
-				{
-					// is this the last card?
-					mycard.doFlip();
-					count = 0;
-				}
-				else
-				{
-					mycard.cardstate = INGAMEDISABLED;
-					count++;
-				}
-
-				playground[mycard.column -1 ].push(mycard);
-
-			}
-
-			if (mycard.cardstate == DECK)
-			{
-				mycard.x = 50;
-				mycard.y = 100;
+				card.cardstate = FOUNDATION;
+				foundation[thisfound].push(card);
+				trace(["Foundation added : " + card.cardname]);
+				return true;
 			}
 		}
 
-		column1();
+		return false;
 
 	}
 
-	private function column1(column : Int=1)
-	{	
 
-		for (i in 0...7)
+	private function printFoundation()
+	{
+		// print all the foundations
+
+		for (i in 0...4)
 		{
-			for (j in 0...playground[i].length)
+			var mydeck = new Array<Card>();
+
+			mydeck = foundation[i];
+
+			for (j in 0...mydeck.length)
 			{
-				trace([playground[i][j].cardname]);
+				trace(["" + "Foundation " + i +  "," + j + " has " + foundation[i][j].cardname]);
 			}
+			
+
 		}
+	}
+
+	function renderFoundation()
+	{
+	}
+
+	function renderPlayground()
+	{
+	}
+
+	function renderDeck()
+	{
 	}
 
 }

@@ -67,6 +67,38 @@ class Mousecursor extends Entity
 		}
 */
 
+
+	}
+
+	public function detectCard(cardvalue : Int = 0)
+	{
+		// detect what kind of card am I touching and only from INGAME
+		var collision = collide("card", this.x,this.y);
+		if (collision != null)
+		{
+			var cardtemp = cast(collision ,Card);
+			if (cardtemp.cardstate == INGAME)
+			{
+				trace([cardtemp.returnValue() + "is behind me"]);
+				var cardval = cardtemp.returnValue();
+				if (cardval == cardvalue) return true;
+			}
+		}
+
+		return false;
+
+	}
+
+	public function returnCard():Card
+	{
+		var collision = collide("card", this.x,this.y);
+		if (collision != null)
+		{
+			var cardtemp = cast(collision ,Card);
+			return cardtemp;
+		}
+		return null;
+
 	}
 
 

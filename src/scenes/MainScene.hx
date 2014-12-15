@@ -90,18 +90,23 @@ class MainScene extends Scene
 
 		// i could handle collision here
 		// but I am too lazy to do that
+
+
+		if (Input.mousePressed)
+		{
+			var card1 = mousecursor.returnCard();
+			if (card1 != null)
+			{
+				deck.moveFoundation(card1);
+				deck.renderCards();
+			}
+		}
 	}
 
 	function deal()
 	{
 		deck.deal();
-
-		for (i in 0...deck.deck.length)
-		{
-			var thecard = deck.deck[i];
-			add(thecard);
-
-		}
+		deck.renderCards();
 
 	}
 

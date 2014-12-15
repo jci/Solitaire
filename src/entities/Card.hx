@@ -22,9 +22,10 @@ import com.haxepunk.graphics.Canvas;
 
 enum CARDSTATE
 {
-	INGAME;
+	IDLE;
 	INGAMEDISABLED;
-	GAME;
+	INGAME;
+	INGAMEFLIPPED;
 	DECK;
 	FOUNDATION;
 
@@ -148,7 +149,11 @@ class Card extends Entity
 
 		super.update();
 
+	}
 
+	public function isFacingDown()
+	{
+		return !_isFlipped;
 	}
 
 
@@ -179,6 +184,16 @@ class Card extends Entity
 	public function moveFoundation()
 	{
 		cardstate = FOUNDATION;
+	}
+
+	public function returnValue()
+	{
+		return _cardvalue;
+	}
+
+	public function returnType()
+	{
+		return _cardtype;
 	}
 
 
