@@ -75,12 +75,9 @@ class MainScene extends Scene
 		_sprite.addChild(_message);
 		HXP.stage.addChild(_sprite);
 
-		// mousecursor
-
 		mousecursor = new Mousecursor();
 		mousecursor.layer = -1;
 		add(mousecursor);
-
 
 		deck.shuffle();
 		deck.addtoScene(this);
@@ -90,6 +87,10 @@ class MainScene extends Scene
 	public override function update()
 	{
 		super.update();
+
+		// i could handle collision here
+		// but I am too lazy to do that
+
 	}
 
 }

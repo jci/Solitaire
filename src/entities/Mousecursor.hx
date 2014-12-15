@@ -57,11 +57,14 @@ class Mousecursor extends Entity
 		if (collision != null)
 		{
 			var cardtemp = cast(collision ,Card);
-			//trace (["" + cardtemp.cardname + " " + cardtemp.type]);
 
-			if (Input.mousePressed)
+
+			if (Input.mousePressed && Input.mouseDown)
 			{
+
+			trace (["" + cardtemp.cardname + " " + cardtemp.type + " " + cardtemp.cardstate]);
 				var selectedcard : Card = cardtemp;
+				cardtemp.setSelected();
 				cardtemp.doFlip();
 			}
 		}

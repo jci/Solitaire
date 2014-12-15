@@ -20,6 +20,20 @@ import flash.display.Sprite;
 import utils.CardFace;
 import com.haxepunk.graphics.Canvas;
 
+enum CARDSTATE
+{
+	OUTGAME;
+	GAME;
+	DECK;
+}
+
+enum FOUNDATION
+{
+	CLUBS;
+	HEARTS;
+	SPADES;
+	DIAMONDS;
+}
 
 
 
@@ -54,6 +68,8 @@ class Card extends Entity
 	private var _canvas : Canvas;
 	public var tempgr : Image;
 
+	public var cardstate : CARDSTATE;
+
 	public override function new(cardvalue:Int = 0, cardtype : Int = 0, thisx : Float =0, thisy :Float = 0)	
 	{
 
@@ -77,8 +93,12 @@ class Card extends Entity
 		_cardface = tempinstance.loadCard(cardvalue,cardtype);
 		_cardcaret = tempinstance.loadCaret();
 
-		addGraphic(_cardface);
+
 		addGraphic(_cardcaret);
+		addGraphic(_cardface);
+
+		_cardface.visible = false;
+		_cardcaret.visible = true;
 
 		setHitboxTo(tempinstance.getHitbox());
 
@@ -89,6 +109,10 @@ class Card extends Entity
 
 		tempgr = new Image("graphics/jci2.png");
 		tempgr.visible = false;
+
+		// all cards start on the deck
+
+		cardstate = OUTGAME;
 
 	}
 
@@ -120,19 +144,6 @@ class Card extends Entity
 		super.update();
 
 
-		if (_isSelected)
-		{
-			// bring forth and display face
-
-			tempgr.visible = true;
-			this.layer=0;
-
-		}
-		else
-		{
-			this.layer = 4;
-			tempgr.visible = false;
-		}
 	}
 
 
@@ -141,24 +152,21 @@ class Card extends Entity
 		_isSelected = !_isSelected;
 	}
 
-	public function setFlipped()
+	public function doFlip()
 	{
+
 		if (!_isFlipped)
 		{
-			 _cardcaret.visible = true;
-			 _cardface.visible = false;
+			_cardface.visible = true;
+			_cardcaret.visible = false;
 		}
 		else
 		{
-			_cardcaret.visible = false;
-			_cardface.visible = true;
+			_cardface.visible = false;
+			_cardcaret.visible = true;
 		}
+		_isFlipped = !_isFlipped;
 	}
 
-	public function doFlip()
-	{
-		_isFlipped = !_isFlipped;
-		setFlipped();
-	}
 
 }

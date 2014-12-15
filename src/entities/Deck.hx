@@ -9,6 +9,11 @@ class Deck
 {
 
 	public var deck : Array<Card>;
+	// public var game : Array<Card>;
+	// public var foundation  : Array<Array<Card>>;
+
+	// YO DAWG I HEARD YOU LIKE DECKS
+	// SO I PUT A DECK IN YOUR DECK WHILE YOU DECK
 
 	public function new()
 	{
@@ -52,13 +57,12 @@ class Deck
 
 		for (i in 0...length())
 		{
-			deck[i].x=100+i*20;
+			deck[i].x=50;
 			deck[i].y=100;
 
 			if (deck[1].scene == scene)
 			{
 				scene.remove(deck[i]);
-				// to prevent duplication...
 			}
 			scene.add(deck[i]);
 		}
@@ -95,6 +99,22 @@ class Deck
 	{
 		shuffle();
 		addtoScene(scene);
+	}
+
+	public function deal(scene : Scene)
+	{
+		shuffle();
+	
+		var col =1;
+		// now the rules
+		// first, the cards that go on game
+		for (mydeal in 0...6)
+		{
+			// the columns
+			
+
+		}
+
 	}
 
 
