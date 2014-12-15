@@ -23,9 +23,11 @@ import com.haxepunk.graphics.Canvas;
 enum CARDSTATE
 {
 	INGAME;
+	INGAMEDISABLED;
 	GAME;
 	DECK;
 	FOUNDATION;
+
 }
 
 enum FOUNDATION
@@ -157,8 +159,11 @@ class Card extends Entity
 
 	public function doFlip()
 	{
+		if (cardstate == INGAMEDISABLED) return;	// don't flip cards that don't need to 
 
-		if (!_isFlipped)
+		_isFlipped = !_isFlipped;
+
+		if (_isFlipped)
 		{
 			_cardface.visible = true;
 			_cardcaret.visible = false;
@@ -168,7 +173,7 @@ class Card extends Entity
 			_cardface.visible = false;
 			_cardcaret.visible = true;
 		}
-		_isFlipped = !_isFlipped;
+
 	}
 
 	public function moveFoundation()
