@@ -28,7 +28,7 @@ class Mousecursor extends Entity
 		thisimage.centerOrigin();
 		setHitbox(1,1);
 		addGraphic(thisimage);
-		this.visible = true;
+		this.visible = false;
 		this.layer = 4;
 
 	}
@@ -57,12 +57,12 @@ class Mousecursor extends Entity
 		if (collision != null)
 		{
 			var cardtemp = cast(collision ,Card);
-		//	trace (["" + cardtemp.cardname + " " + cardtemp.type]);
+			//trace (["" + cardtemp.cardname + " " + cardtemp.type]);
 
 			if (Input.mousePressed)
 			{
-				var tempscene = cast(this.scene,MainScene);
-				tempscene.deck.shuffle();
+				var selectedcard : Card = cardtemp;
+				cardtemp.doFlip();
 			}
 		}
 

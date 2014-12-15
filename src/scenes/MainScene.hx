@@ -44,14 +44,21 @@ class MainScene extends Scene
 
 	public override function new()
 	{
+		super();
 
+
+		init();
+
+	}
+
+	private function init()
+	{
 		var counter : Float;
 		var cvalue : Int = 0;
 		var ccolor : Int = 0;
 		var _sprite : Sprite;
 
 
-		super();
 		_sprite = new Sprite();
 
 		deck = new Deck();
@@ -78,16 +85,11 @@ class MainScene extends Scene
 		deck.shuffle();
 		deck.addtoScene(this);
 
-
 	}
 
 	public override function update()
 	{
 		super.update();
-		if (Input.mousePressed)
-		{
-			deck.reshuffle(this);
-		}
 	}
 
 }

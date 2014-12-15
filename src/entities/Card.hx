@@ -3,7 +3,6 @@ package entities;
 import com.haxepunk.Entity;
 import com.haxepunk.Scene;
 import com.haxepunk.Graphic;
-import flash.display.Graphics;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.*;
 import com.haxepunk.Mask;
@@ -16,7 +15,10 @@ import com.haxepunk.utils.Draw;
 import com.haxepunk.Tween;
 import com.haxepunk.Tweener;
 import com.haxepunk.tweens.misc.NumTween;
+import flash.geom.Rectangle;
+import flash.display.Sprite;
 import utils.CardFace;
+import com.haxepunk.graphics.Canvas;
 
 
 
@@ -34,9 +36,10 @@ class Card extends Entity
 	private var _stCard : String;
 	private var _cardvalue : Int; 
 	private var _cardtype : Int; 
+	private var _cardutil : CardFace;
 	private var _cardface : Graphic;
 	private var _cardcaret : Graphic;
-	private var _cardutil : CardFace;
+
 	private var _mouseover : Bool;
 	private var _clickstarted : Bool;
 	private var _dragging : Bool;
@@ -45,17 +48,21 @@ class Card extends Entity
 	private var _origy : Float;
 	private var _isSelected : Bool;
 	private var _sizetween : NumTween;
+	private var _entrect : Rectangle;
 
 	public var cardname : String;
+	private var _canvas : Canvas;
+	public var tempgr : Image;
 
 	public override function new(cardvalue:Int = 0, cardtype : Int = 0, thisx : Float =0, thisy :Float = 0)	
 	{
 
-		var tempinstance = CardFace.getInstance();
 		super();
-	
+
+		var tempinstance = CardFace.getInstance();
 		x = thisx;
 		y = thisy;
+		type = "card";
 
 		_draggable = true;
 		_cardvalue	=	cardvalue;
@@ -66,7 +73,13 @@ class Card extends Entity
 		layer = 4;
 		cardname = (_cardvalue+1) + " of " + doType(_cardtype);
 		
-		addGraphic(tempinstance.loadCard(cardvalue,cardtype));
+//		addGraphic(tempinstance.loadCard(cardvalue,cardtype));
+		_cardface = tempinstance.loadCard(cardvalue,cardtype);
+		_cardcaret = tempinstance.loadCaret();
+
+		addGraphic(_cardface);
+		addGraphic(_cardcaret);
+
 		setHitboxTo(tempinstance.getHitbox());
 
 		_sizetween = new NumTween();
@@ -74,11 +87,11 @@ class Card extends Entity
 
 		addTween(_sizetween);	
 
-		type = "card";
-
-
+		tempgr = new Image("graphics/jci2.png");
+		tempgr.visible = false;
 
 	}
+
 
 
 	private function doType(cardtype:Int)
@@ -107,6 +120,45 @@ class Card extends Entity
 		super.update();
 
 
+		if (_isSelected)
+		{
+			// bring forth and display face
+
+			tempgr.visible = true;
+			this.layer=0;
+
+		}
+		else
+		{
+			this.layer = 4;
+			tempgr.visible = false;
+		}
+	}
+
+
+	public function setSelected()
+	{
+		_isSelected = !_isSelected;
+	}
+
+	public function setFlipped()
+	{
+		if (!_isFlipped)
+		{
+			 _cardcaret.visible = true;
+			 _cardface.visible = false;
+		}
+		else
+		{
+			_cardcaret.visible = false;
+			_cardface.visible = true;
+		}
+	}
+
+	public function doFlip()
+	{
+		_isFlipped = !_isFlipped;
+		setFlipped();
 	}
 
 }

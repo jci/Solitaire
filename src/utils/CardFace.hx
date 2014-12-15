@@ -60,5 +60,12 @@ class CardFace
 		return newhitbox;
 	}
 
+	public function loadCaret()
+	{
+		var caretface = new Image("graphics/flipped.png");
+		caretface.centerOrigin();
+		return caretface;
+	}
+
 }
 
